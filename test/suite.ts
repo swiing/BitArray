@@ -8,7 +8,7 @@ const arr1 = new Array( len      ).fill(false).map( x => Math.random() > 0.5 )
 const arr2 = new Array( len + 10 ).fill(false).map( x => Math.random() > 0.5 )
 
 const sample1 = BitArray.from( arr1 );
-const sample2 = BitArray.from( arr2 );
+const sample2 = BitArray.of( ...arr2 );
 
 // matches the format of BitArray.toSting()
 function toString( arr ) {
@@ -23,7 +23,8 @@ function toString( arr ) {
 
 /** suite 1 */
 const instantiating = {
-  "is instanceof BitArray": sample1 instanceof BitArray
+  "BitArray.from": sample1 instanceof BitArray,
+  "BitArray.of":   sample2 instanceof BitArray
 };
 
 /** suite 2 */

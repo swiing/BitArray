@@ -46,6 +46,7 @@ export default class BitArray extends BitTypedArray {
     xor: (bitArray: BitArray) => BitArray;
 
     static from: (source: Iterable<any>) => BitArray;
+    static of: ( ...args ) => BitArray;
 
     /**
      * returns the number of 'true' entries
