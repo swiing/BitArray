@@ -12,11 +12,12 @@
   "scripts": {
     "build": "tsc -t ES6 --moduleResolution node --declaration --outDir dist/ ./src/bitarray.ts",
     "example": "node example",
-    "test": "node test"
+    "test": "node --loader ts-node/esm test/index.ts"
   },
   "author": "swiing",
   "license": "ISC",
   "devDependencies": {
-    "@bitarray/typedarray": "^0.2.0"
+    "@bitarray/typedarray": "^0.2.0",
+    "ts-node": "^9.1.1"
   }
 }

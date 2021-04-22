@@ -1,4 +1,4 @@
-import BitArray from "../../es6/dist/bitarray.js";
+import BitArray from "../src/bitarray.js";
 
 const len = 42; // choose whatever value
 
@@ -44,12 +44,12 @@ const binary_operations = (()=>{
         // make sure we don't have bits set beyond the length of the bitarray
         && (sample1)['|'](sample2) .count == arr1.reduce( (acc,bit,i) => acc+(Number(arr1[i])|Number(arr2[i])), 0 ),
         
-    "^":   (sample1)['^'](sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i] ^  arr2[i] ))
+    "^":   (sample1)['^'](sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i] !==  arr2[i] ))
         && (sample1)['^'](sample2) .count == arr1.reduce( (acc,bit,i) => acc+(Number(arr1[i])^Number(arr2[i])), 0 ),
     
-    "or" : (sample1).or  (sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i] || arr2[i] )),
-    "and": (sample1).and (sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i] && arr2[i] )),
-    "xor": (sample1).xor (sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i] ^  arr2[i] ))
+    "or" : (sample1).or  (sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i]  ||  arr2[i] )),
+    "and": (sample1).and (sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i]  &&  arr2[i] )),
+    "xor": (sample1).xor (sample2) .toString() === toString( shortestArr.map((_,i)=> arr1[i] !==  arr2[i] ))
   }
 
 })();
