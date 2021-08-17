@@ -39,7 +39,7 @@ function getViewer( instance:BitArray ) {
 
 // This is an extension of BitTypedArray with features (methods,getters)
 // not available in native TypedArray's, essentially, bit operations.
-export default class BitArray extends BitTypedArray {
+export default class BitArray extends BitTypedArray { 
 
     and: (bitArray: BitArray) => BitArray;
     or : (bitArray: BitArray) => BitArray;
@@ -179,4 +179,4 @@ BitArray.prototype.and = BitArray.prototype["&"];
 BitArray.prototype.or  = BitArray.prototype["|"];
 BitArray.prototype.xor = BitArray.prototype["^"];
 
-// eof BitTypedArray
+// eof BitArray
