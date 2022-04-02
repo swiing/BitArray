@@ -1,6 +1,6 @@
 {
   "name": "@bitarray/es6",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An ES6 BitArray class for easy and native-like operations on sequences of bits",
   "main": "dist/bitarray.js",
   "types": "dist/bitarray.d.ts",
