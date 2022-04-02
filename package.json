@@ -1,17 +1,21 @@
 {
   "name": "@bitarray/es6",
   "version": "0.1.0",
-  "description": "An ES6 BitArray class for easy operations on sequences of bits",
+  "description": "An ES6 BitArray class for easy and native-like operations on sequences of bits",
   "main": "dist/bitarray.js",
   "types": "dist/bitarray.d.ts",
+  "bugs": {
+    "url": "https://github.com/swiing/BitArray/issues"
+  },
+  "homepage": "https://github.com/swiing/BitArray#readme",
   "directories": {
     "example": "example",
     "test": "test"
   },
   "scripts": {
-    "build": "tsc -t ES6 --moduleResolution node --declaration --outDir dist/ ./src/bitarray.ts",
+    "build": "tsc",
     "example": "node --loader ts-node/esm example",
-    "test": "node --loader ts-node/esm test/index.ts"
+    "test": "node --loader ts-node/esm test"
   },
   "author": "swiing",
   "license": "ISC",
@@ -19,6 +23,12 @@
     "@bitarray/typedarray": "^1.0.0"
   },
   "devDependencies": {
-    "ts-node": "^10.7.0"
-  }
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "keywords": [
+    "bitarray",
+    "bitwise",
+    "typedarray"
+  ]
 }
