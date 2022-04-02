@@ -11,12 +11,12 @@ _$("Randomly initializing an array");
       randomArray[i] = (Math.random() > 0.5);
 
   _( "instanceof == BoolArray", randomArray instanceof BoolArray )
-      
+
   _( "array == ", randomArray);
 
-  
+
 _$("properties");
-  
+
   _( ".count", randomArray.count);
 
 

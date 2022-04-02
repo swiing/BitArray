@@ -54,13 +54,13 @@ export default class BitArray extends BitTypedArray {
         }
         return count;
     }
-    // Implementation note 1: I once used the maximum length of the two operands (for | and for ^), 
-    // defaulting to 'false' for the operand with "missing" values. However, it is arguable that 
-    // this is a good default assumption (it depends on context) so I finally prefer to go 
+    // Implementation note 1: I once used the maximum length of the two operands (for | and for ^),
+    // defaulting to 'false' for the operand with "missing" values. However, it is arguable that
+    // this is a good default assumption (it depends on context) so I finally prefer to go
     // conservative, and compute only when there is actual data available (i.e. not assuming
     // 'false' otherwise).
     // As a positive side effect, it also simplifies implementation (but this is not the driver).
-    // Implementation note 2: I could have a very simple implementation doing e.g. 
+    // Implementation note 2: I could have a very simple implementation doing e.g.
     // ret[i] = this[i] && bitArray[i], for every index
     // However, this would go through the array bit by bit. Instead, I go 4 bytes by 4 bytes (Uint32).
     // This is where improved performance is expected.
@@ -87,9 +87,9 @@ export default class BitArray extends BitTypedArray {
             // note: ret is a proxy;
             retView[offset] = thisView[offset] | bitArrayView[offset];
         // Needed only if length of the returned value would be the max length of the two operands
-        // for( /**/; 
+        // for( /**/;
         //      // offset < ( Math.max( this.length, bitArray.length ) >> 5 ) + 1;
-        //      // (tbc) same as: 
+        //      // (tbc) same as:
         //      offset < ret.length >> 5;
         //      offset++ )
         //    _views.get( ret.buffer )[ offset ] = _views.get( ( this.length <= bitArray.length ? bitArray : _targets.get( this ) ).buffer )[ offset ];
