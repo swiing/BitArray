@@ -146,4 +146,3 @@ export default class BitArray extends BitTypedArray {
 BitArray.prototype.and = BitArray.prototype["&"];
 BitArray.prototype.or = BitArray.prototype["|"];
 BitArray.prototype.xor = BitArray.prototype["^"];
-// eof BitTypedArray
