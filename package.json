@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc -t ES6 --moduleResolution node --declaration --outDir dist/ ./src/bitarray.ts",
-    "example": "node example",
+    "example": "node --loader ts-node/esm example",
     "test": "node --loader ts-node/esm test/index.ts"
   },
   "author": "swiing",

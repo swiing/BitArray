@@ -7,7 +7,7 @@ function logHeader( arg0, ...rest ) {
   console.info( "%c> "+arg0, ...rest, styleHeader );
 }
 
-function log() {
+function log(_1, _2) {
   console.log(...arguments);
 }
 

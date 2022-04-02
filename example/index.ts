@@ -1,5 +1,5 @@
-import BoolArray from '../dist/bitarray.js';
-import { log as _, logHeader as _$ } from "./util.js";
+import BoolArray from '../src/bitarray';
+import { log as _, logHeader as _$ } from "./util";
 
 
 const len = 33; // choose any integer value
@@ -7,7 +7,7 @@ const len = 33; // choose any integer value
 _$("Randomly initializing an array");
 
   const randomArray = new BoolArray(len);
-  for( let i=0, bool; i<len; i++)
+  for( let i=0, bool; i<len; i++) // @ts-ignore
       randomArray[i] = (Math.random() > 0.5);
 
   _( "instanceof == BoolArray", randomArray instanceof BoolArray )
