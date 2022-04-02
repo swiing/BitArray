@@ -4,7 +4,6 @@
   "description": "An ES6 BitArray class for easy operations on sequences of bits",
   "main": "dist/bitarray.js",
   "types": "dist/bitarray.d.ts",
-  "type": "module",
   "directories": {
     "example": "example",
     "test": "test"

@@ -1,4 +1,4 @@
-import BitArray from "../src/bitarray.js";
+import BitArray from "../src/bitarray";
 
 const len = 42; // choose whatever value
 
