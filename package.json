@@ -29,7 +29,7 @@
     "test": "node --loader ts-node/esm test"
   },
   "author": "swiing",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@bitarray/typedarray": "^1.0.0"
   },

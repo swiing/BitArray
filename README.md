@@ -102,4 +102,4 @@ Object.entries(bits); // [["0", 1], ["1", 1], ["2", 0], ["3", 0], ...]
 
 ## License
 
-![license](https://img.shields.io/github/license/swiing/BitArray)
+[![license](https://img.shields.io/github/license/swiing/BitArray)](https://github.com/swiing/BitArray/blob/main/LICENSE)
