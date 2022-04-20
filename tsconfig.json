@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "moduleResolution": "node",
-    "declarationDir": "dist",
+    "declarationDir": "./dist/esm",
     "declaration": true
   },
   "files": [
