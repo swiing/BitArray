@@ -240,6 +240,18 @@ export default class BitArray extends BitTypedArray {
         return ret;
     }
 
+    // Convenience specializations for encoding base64MIME and base64Url
+    static base64MIMEChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    encodeBase64MIME() { return this.encodeWithCharacterSet(BitArray.base64MIMEChars) }
+    static decodeBase64MIME(encodedString: string) { 
+        return BitArray.decodeWithCharacterSet(BitArray.base64MIMEChars, encodedString);
+    }
+    
+    static base64UrlChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
+    encodeBase64Url() { return this.encodeWithCharacterSet(BitArray.base64UrlChars) }
+    static decodeBase64Url(encodedString: string) { 
+        return BitArray.decodeWithCharacterSet(BitArray.base64UrlChars, encodedString);
+    }
 }
 
 // create aliases

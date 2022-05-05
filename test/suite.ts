@@ -79,10 +79,12 @@ const character_encoding_from_set = {
 /** suite 5 */
 const character_encode_decode = {
   ".decodeWithCharacterSet_1bit": BitArray.decodeWithCharacterSet('ab', 'abba').toString() === sample3.toString(),
+  // Note: the substring is needed because when deserializing, we  have some number of padding 0s that we can't know were
+  // in the original string or not
   ".decodeWithCharacterSet_3bit": BitArray.decodeWithCharacterSet('abcdefgh', 'da').toString().substring(0, 4) === sample3.toString(),
   ".decodeWithCharacterSet_empty": BitArray.decodeWithCharacterSet('ab', '').toString() === '',
   ".decodeWithCharacterSet_invalid": expectThrow(() => BitArray.decodeWithCharacterSet('ab', 'abc')),
-  ".decodeWithCharacterSet_": expectThrow(() => BitArray.decodeWithCharacterSet('', 'abba')),
+  ".decodeWithCharacterSet_": expectThrow(() => BitArray.decodeWithCharacterSet('', 'abba'))
 };
 
 
