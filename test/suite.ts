@@ -9,6 +9,18 @@ const arr2 = new Array( len + 10 ).fill(false).map( x => Math.random() > 0.5 )
 
 const sample1 = BitArray.from( arr1 );
 const sample2 = BitArray.of( ...arr2 );
+const sample3 = BitArray.from( '0110');
+
+// Returns true if the block throws
+function expectThrow( fn: () => void) {
+  try {
+    fn();
+  } catch(e) {
+    return true;
+  }
+
+  return false;
+}
 
 // matches the format of BitArray.toSting()
 function toString( arr ) {
@@ -55,9 +67,30 @@ const binary_operations = (()=>{
 
 })();
 
+/** suite 4 */
+const character_encoding_from_set = {
+  ".encodeWithCharacterSet_1bit": sample3.encodeWithCharacterSet('ab') === 'abba',
+  ".encodeWithCharacterSet_3bit": sample3.encodeWithCharacterSet('abcdefgh') === 'da',
+  ".encodeWithCharacterSet_": expectThrow(() => sample3.encodeWithCharacterSet('')),
+  ".encodeWithCharacterSet_a": expectThrow(() => sample3.encodeWithCharacterSet('a')),
+  ".encodeWithCharacterSet_abc": expectThrow(() => sample3.encodeWithCharacterSet('abc'))
+};
+
+/** suite 5 */
+const character_encode_decode = {
+  ".decodeWithCharacterSet_1bit": BitArray.decodeWithCharacterSet('ab', 'abba').toString() === sample3.toString(),
+  ".decodeWithCharacterSet_3bit": BitArray.decodeWithCharacterSet('abcdefgh', 'da').toString().substring(0, 4) === sample3.toString(),
+  ".decodeWithCharacterSet_empty": BitArray.decodeWithCharacterSet('ab', '').toString() === '',
+  ".decodeWithCharacterSet_invalid": expectThrow(() => BitArray.decodeWithCharacterSet('ab', 'abc')),
+  ".decodeWithCharacterSet_": expectThrow(() => BitArray.decodeWithCharacterSet('', 'abba')),
+};
+
+
 export default {
   instantiating,
   properties,
-  binary_operations
+  binary_operations,
+  character_encoding_from_set,
+  character_encode_decode
 };
 

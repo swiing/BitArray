@@ -172,6 +172,74 @@ export default class BitArray extends BitTypedArray {
         return ret;
     }
 
+    /**
+     *
+     * @param charSet a set of n characters to use to encode the BitArray; charSet.length must be a power of 2 (2, 4, 8, etc)
+     * The more characters in the set, the more compact the resulting output will be
+     * @returns a string encoded using the provided character set (e.g., base64 encoding can be achieved with this)
+     */
+    encodeWithCharacterSet( charSet: string | string[] ): string {
+        const charArray = ((typeof charSet === 'string') ? Array.from(charSet) : charSet);
+        const log2 = Math.log2(charArray.length);
+
+        if (log2 < 1 || log2 % 1 !== 0) {
+            throw new RangeError('Provided charset\' length must non-0 positive power of 2');
+        }
+
+        const ret = [];
+
+        let val = 0;
+        let valLen = 0;
+        for (const b of this) {
+            valLen++;
+            val <<= 1;
+            val += b;
+
+            if (valLen === log2) {
+                ret.push(charArray[val]);
+                valLen = val = 0;
+            }
+        }
+
+        if (valLen !== 0) {
+            val <<= (log2 - valLen);
+            ret.push(charArray[val]);
+        }
+
+        return ret.join('');
+    }
+
+    /**
+     *
+     * @param charSet a set of n characters to use to encode the BitArray; charSet.length must be a power of 2 (2, 4, 8, etc),
+     * and should generally match the set used in the original encoding
+     * @param encodedString an encoded string built with encodeWithCharacterSet
+     * @returns a BitArray of the encodedString decoded using charSet
+     */
+     static decodeWithCharacterSet( charSet: string | string[], encodedString: string ): BitArray {
+        const charArray = ((typeof charSet === 'string') ? Array.from(charSet) : charSet);
+        const log2 = Math.log2(charArray.length);
+        
+        if (log2 < 1 || log2 % 1 !== 0) {
+            throw new RangeError('Provided charset\' length must non-0 positive power of 2');
+        }
+
+        const pad = (s: string) => '0'.repeat(log2 - s.length) + s
+
+        const charMap = {} // maps each character to its integral value
+        charArray.forEach((k, i) => {
+            charMap[k] = pad(i.toString(2))
+        });
+        const deserialized = Array.from(encodedString).flatMap(c => {
+            if (!(c in charMap)) {
+                throw new RangeError('Invalid character found in encoded string');
+            }
+            return charMap[c];
+        }).join('')
+        const ret = BitArray.from(deserialized);
+        return ret;
+    }
+
 }
 
 // create aliases
