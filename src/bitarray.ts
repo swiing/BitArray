@@ -228,8 +228,8 @@ export default class BitArray extends BitTypedArray {
         for (var i = 0; i < charArray.length; i++) {
             charMap[charArray[i]] = pad(i.toString(2))
         }
-        
-        const deserialized = Array.from(encodedString).flatMap(c => {
+
+        const deserialized = Array.from(encodedString).map(c => {
             if (!(c in charMap)) {
                 throw new RangeError('Invalid character found in encoded string');
             }
