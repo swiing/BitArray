@@ -182,7 +182,7 @@ export default class BitArray extends BitTypedArray {
         const log2 = Math.log2(charArray.length);
 
         if (log2 < 1 || log2 % 1 !== 0) {
-            throw new RangeError('Provided charset\' length must non-0 positive power of 2');
+            throw new RangeError('Provided charArray\'s length must non-0 positive power of 2');
         }
 
         const ret = [];
@@ -219,7 +219,7 @@ export default class BitArray extends BitTypedArray {
         const log2 = Math.log2(charArray.length);
         
         if (log2 < 1 || log2 % 1 !== 0) {
-            throw new RangeError('Provided charset\' length must non-0 positive power of 2');
+            throw new RangeError('Provided charArray\'s length must non-0 positive power of 2');
         }
 
         const pad = (s: string) => '0'.repeat(log2 - s.length) + s
