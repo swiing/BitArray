@@ -174,12 +174,11 @@ export default class BitArray extends BitTypedArray {
 
     /**
      *
-     * @param charSet a set of n characters to use to encode the BitArray; charSet.length must be a power of 2 (2, 4, 8, etc)
+     * @param charArray a set of n characters to use to encode the BitArray; charArray.length must be a power of 2 (2, 4, 8, etc)
      * The more characters in the set, the more compact the resulting output will be
      * @returns a string encoded using the provided character set (e.g., base64 encoding can be achieved with this)
      */
-    encodeWithCharacterSet( charSet: string | string[] ): string {
-        const charArray = ((typeof charSet === 'string') ? Array.from(charSet) : charSet);
+    encodeWithCharacterSet( charArray: string): string {
         const log2 = Math.log2(charArray.length);
 
         if (log2 < 1 || log2 % 1 !== 0) {
@@ -211,13 +210,12 @@ export default class BitArray extends BitTypedArray {
 
     /**
      *
-     * @param charSet a set of n characters to use to encode the BitArray; charSet.length must be a power of 2 (2, 4, 8, etc),
+     * @param charArray a set of n characters to use to encode the BitArray; charArray.length must be a power of 2 (2, 4, 8, etc),
      * and should generally match the set used in the original encoding
      * @param encodedString an encoded string built with encodeWithCharacterSet
-     * @returns a BitArray of the encodedString decoded using charSet
+     * @returns a BitArray of the encodedString decoded using charArray
      */
-     static decodeWithCharacterSet( charSet: string | string[], encodedString: string ): BitArray {
-        const charArray = ((typeof charSet === 'string') ? Array.from(charSet) : charSet);
+     static decodeWithCharacterSet( charArray: string, encodedString: string ): BitArray {
         const log2 = Math.log2(charArray.length);
         
         if (log2 < 1 || log2 % 1 !== 0) {
@@ -227,9 +225,10 @@ export default class BitArray extends BitTypedArray {
         const pad = (s: string) => '0'.repeat(log2 - s.length) + s
 
         const charMap = {} // maps each character to its integral value
-        charArray.forEach((k, i) => {
-            charMap[k] = pad(i.toString(2))
-        });
+        for (var i = 0; i < charArray.length; i++) {
+            charMap[charArray[i]] = pad(i.toString(2))
+        }
+        
         const deserialized = Array.from(encodedString).flatMap(c => {
             if (!(c in charMap)) {
                 throw new RangeError('Invalid character found in encoded string');
