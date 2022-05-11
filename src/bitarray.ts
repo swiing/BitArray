@@ -172,6 +172,85 @@ export default class BitArray extends BitTypedArray {
         return ret;
     }
 
+    /**
+     *
+     * @param charArray a set of n characters to use to encode the BitArray; charArray.length must be a power of 2 (2, 4, 8, etc)
+     * The more characters in the set, the more compact the resulting output will be
+     * @returns a string encoded using the provided character set (e.g., base64 encoding can be achieved with this)
+     */
+    encodeWithCharacterSet( charArray: string): string {
+        const log2 = Math.log2(charArray.length);
+
+        if (log2 < 1 || log2 % 1 !== 0) {
+            throw new RangeError('Provided charArray\'s length must non-0 positive power of 2');
+        }
+
+        const ret = [];
+
+        let val = 0;
+        let valLen = 0;
+        for (const b of this) {
+            valLen++;
+            val <<= 1;
+            val += b;
+
+            if (valLen === log2) {
+                ret.push(charArray[val]);
+                valLen = val = 0;
+            }
+        }
+
+        if (valLen !== 0) {
+            val <<= (log2 - valLen);
+            ret.push(charArray[val]);
+        }
+
+        return ret.join('');
+    }
+
+    /**
+     *
+     * @param charArray a set of n characters to use to encode the BitArray; charArray.length must be a power of 2 (2, 4, 8, etc),
+     * and should generally match the set used in the original encoding
+     * @param encodedString an encoded string built with encodeWithCharacterSet
+     * @returns a BitArray of the encodedString decoded using charArray
+     */
+     static decodeWithCharacterSet( charArray: string, encodedString: string ): BitArray {
+        const log2 = Math.log2(charArray.length);
+        
+        if (log2 < 1 || log2 % 1 !== 0) {
+            throw new RangeError('Provided charArray\'s length must non-0 positive power of 2');
+        }
+
+        const pad = (s: string) => '0'.repeat(log2 - s.length) + s
+
+        const charMap = {} // maps each character to its integral value
+        for (var i = 0; i < charArray.length; i++) {
+            charMap[charArray[i]] = pad(i.toString(2))
+        }
+
+        const deserialized = Array.from(encodedString).map(c => {
+            if (!(c in charMap)) {
+                throw new RangeError('Invalid character found in encoded string');
+            }
+            return charMap[c];
+        }).join('')
+        const ret = BitArray.from(deserialized);
+        return ret;
+    }
+
+    // Convenience specializations for encoding base64MIME and base64Url
+    static base64MIMEChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    encodeBase64MIME() { return this.encodeWithCharacterSet(BitArray.base64MIMEChars) }
+    static decodeBase64MIME(encodedString: string) { 
+        return BitArray.decodeWithCharacterSet(BitArray.base64MIMEChars, encodedString);
+    }
+    
+    static base64UrlChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
+    encodeBase64Url() { return this.encodeWithCharacterSet(BitArray.base64UrlChars) }
+    static decodeBase64Url(encodedString: string) { 
+        return BitArray.decodeWithCharacterSet(BitArray.base64UrlChars, encodedString);
+    }
 }
 
 // create aliases
