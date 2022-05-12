@@ -1,4 +1,4 @@
-import suite from "./suite";
-import test  from "./test";
+import suite from './suite';
+import test from './test';
 
-test( suite );
+test(suite);

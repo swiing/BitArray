@@ -27,6 +27,8 @@
     "postbuild": "bash ./scripts/postbuild.sh",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
+    "style:fix": "prettier {example,src,test}/**/*.ts --write",
+    "style:check": "prettier {example,src,test}/**/*.ts --check",
     "test": "node --loader ts-node/esm test"
   },
   "author": "swiing",
@@ -35,6 +37,7 @@
     "@bitarray/typedarray": "^1.0.0"
   },
   "devDependencies": {
+    "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
