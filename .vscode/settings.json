@@ -1,0 +1,11 @@
+{
+  // From VSCode 1.67.1, this is the default
+  // "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // VSCode uses same TS version as package
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
