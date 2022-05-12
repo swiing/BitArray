@@ -69,22 +69,22 @@ const binary_operations = (()=>{
 
 /** suite 4 */
 const character_encoding_from_set = {
-  ".encodeWithCharacterSet_1bit": sample3.encodeWithCharacterSet('ab') === 'abba',
-  ".encodeWithCharacterSet_3bit": sample3.encodeWithCharacterSet('abcdefgh') === 'da',
-  ".encodeWithCharacterSet_": expectThrow(() => sample3.encodeWithCharacterSet('')),
-  ".encodeWithCharacterSet_a": expectThrow(() => sample3.encodeWithCharacterSet('a')),
-  ".encodeWithCharacterSet_abc": expectThrow(() => sample3.encodeWithCharacterSet('abc'))
+  ".encode_1bit": sample3.encode('ab') === 'abba',
+  ".encode_3bit": sample3.encode('abcdefgh') === 'da',
+  ".encode_": expectThrow(() => sample3.encode('')),
+  ".encode_a": expectThrow(() => sample3.encode('a')),
+  ".encode_abc": expectThrow(() => sample3.encode('abc'))
 };
 
 /** suite 5 */
 const character_encode_decode = {
-  ".decodeWithCharacterSet_1bit": BitArray.decodeWithCharacterSet('ab', 'abba').toString() === sample3.toString(),
+  ".decode_1bit": BitArray.decode('abba', 'ab').toString() === sample3.toString(),
   // Note: the substring is needed because when deserializing, we  have some number of padding 0s that we can't know were
   // in the original string or not
-  ".decodeWithCharacterSet_3bit": BitArray.decodeWithCharacterSet('abcdefgh', 'da').toString().substring(0, 4) === sample3.toString(),
-  ".decodeWithCharacterSet_empty": BitArray.decodeWithCharacterSet('ab', '').toString() === '',
-  ".decodeWithCharacterSet_invalid": expectThrow(() => BitArray.decodeWithCharacterSet('ab', 'abc')),
-  ".decodeWithCharacterSet_": expectThrow(() => BitArray.decodeWithCharacterSet('', 'abba'))
+  ".decode_3bit": BitArray.decode('da', 'abcdefgh').toString().substring(0, 4) === sample3.toString(),
+  ".decode_empty": BitArray.decode('', 'ab').toString() === '',
+  ".decode_invalid": expectThrow(() => BitArray.decode('abc', 'ab')),
+  ".decode_": expectThrow(() => BitArray.decode('abba', ''))
 };
 
 

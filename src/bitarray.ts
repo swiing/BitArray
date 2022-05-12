@@ -25,6 +25,10 @@
 
 import BitTypedArray from "@bitarray/typedarray";
 
+import {base64MIMEChars, base64UrlChars} from "./alphabet";
+
+const alphabetLengthErrorMsg = 'Alphabet\'s length must be a power of 2';
+
 // I could leverage _views from @bitarray/typedarray, or create a new one here.
 // import { _views } from "./bit-typedarray.js";
 const _views = new WeakMap<ArrayBuffer,Uint32Array>();
@@ -174,15 +178,15 @@ export default class BitArray extends BitTypedArray {
 
     /**
      *
-     * @param charArray a set of n characters to use to encode the BitArray; charArray.length must be a power of 2 (2, 4, 8, etc)
+     * @param alphabet a set of n characters to use to encode the BitArray; alphabet.length must be a power of 2 (2, 4, 8, etc)
      * The more characters in the set, the more compact the resulting output will be
      * @returns a string encoded using the provided character set (e.g., base64 encoding can be achieved with this)
      */
-    encodeWithCharacterSet( charArray: string): string {
-        const log2 = Math.log2(charArray.length);
+    encode(alphabet: string): string {
+        const log2 = Math.log2(alphabet.length);
 
         if (log2 < 1 || log2 % 1 !== 0) {
-            throw new RangeError('Provided charArray\'s length must non-0 positive power of 2');
+            throw new RangeError(alphabetLengthErrorMsg);
         }
 
         const ret = [];
@@ -195,14 +199,14 @@ export default class BitArray extends BitTypedArray {
             val += b;
 
             if (valLen === log2) {
-                ret.push(charArray[val]);
+                ret.push(alphabet[val]);
                 valLen = val = 0;
             }
         }
 
         if (valLen !== 0) {
             val <<= (log2 - valLen);
-            ret.push(charArray[val]);
+            ret.push(alphabet[val]);
         }
 
         return ret.join('');
@@ -210,23 +214,23 @@ export default class BitArray extends BitTypedArray {
 
     /**
      *
-     * @param charArray a set of n characters to use to encode the BitArray; charArray.length must be a power of 2 (2, 4, 8, etc),
+     * @param alphabet a set of n characters to use to encode the BitArray; alphabet.length must be a power of 2 (2, 4, 8, etc),
      * and should generally match the set used in the original encoding
-     * @param encodedString an encoded string built with encodeWithCharacterSet
-     * @returns a BitArray of the encodedString decoded using charArray
+     * @param encodedString an encoded string built with encode
+     * @returns a BitArray of the encodedString decoded using alphabet
      */
-     static decodeWithCharacterSet( charArray: string, encodedString: string ): BitArray {
-        const log2 = Math.log2(charArray.length);
+     static decode(encodedString: string, alphabet: string): BitArray {
+        const log2 = Math.log2(alphabet.length);
         
         if (log2 < 1 || log2 % 1 !== 0) {
-            throw new RangeError('Provided charArray\'s length must non-0 positive power of 2');
+            throw new RangeError(alphabetLengthErrorMsg);
         }
 
         const pad = (s: string) => '0'.repeat(log2 - s.length) + s
 
         const charMap = {} // maps each character to its integral value
-        for (var i = 0; i < charArray.length; i++) {
-            charMap[charArray[i]] = pad(i.toString(2))
+        for (var i = 0; i < alphabet.length; i++) {
+            charMap[alphabet[i]] = pad(i.toString(2))
         }
 
         const deserialized = Array.from(encodedString).map(c => {
@@ -235,21 +239,21 @@ export default class BitArray extends BitTypedArray {
             }
             return charMap[c];
         }).join('')
-        const ret = BitArray.from(deserialized);
-        return ret;
+
+        return BitArray.from(deserialized);
     }
 
     // Convenience specializations for encoding base64MIME and base64Url
-    static base64MIMEChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    encodeBase64MIME() { return this.encodeWithCharacterSet(BitArray.base64MIMEChars) }
+    encodeBase64MIME() { 
+        return this.encode(base64MIMEChars);
+    }
     static decodeBase64MIME(encodedString: string) { 
-        return BitArray.decodeWithCharacterSet(BitArray.base64MIMEChars, encodedString);
+        return BitArray.decode(encodedString, base64MIMEChars);
     }
     
-    static base64UrlChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
-    encodeBase64Url() { return this.encodeWithCharacterSet(BitArray.base64UrlChars) }
+    encodeBase64Url() { return this.encode(base64UrlChars) }
     static decodeBase64Url(encodedString: string) { 
-        return BitArray.decodeWithCharacterSet(BitArray.base64UrlChars, encodedString);
+        return BitArray.decode(encodedString, base64UrlChars);
     }
 }
 
