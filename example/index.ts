@@ -1,17 +1,15 @@
 import BoolArray from '../src/bitarray';
 import { log as _, logHeader as _$ } from './util';
 
+import { bit } from '@bitarray/typedarray';
+
 const len = 33; // choose any integer value
 
 _$('Randomly initializing an array');
 
 const randomArray = new BoolArray(len);
-for (
-  let i = 0, bool;
-  i < len;
-  i++ // @ts-ignore
-)
-  randomArray[i] = Math.random() > 0.5;
+for (let i = 0; i < len; i++)
+  randomArray[i] = (Math.random() > 0.5) as unknown as bit;
 
 _('instanceof == BoolArray', randomArray instanceof BoolArray);
 
