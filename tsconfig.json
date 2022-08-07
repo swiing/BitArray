@@ -6,6 +6,12 @@
     "declaration": true
   },
   "files": [
-    "src/bitarray.ts"
+    "src/bitarray.ts",
+    "src/alphabet.ts",
+    "example/index.ts",
+    "example/util.ts",
+    "test/index.ts",
+    "test/test.ts",
+    "test/suite.ts"
   ]
 }
