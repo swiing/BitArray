@@ -1,5 +1,14 @@
 # @bitarray/es6 ChangeLog
 
+## v1.1.1
+
+_2022-08-07_
+
+- fix: file extension in import
+- fix: files list in tsconfig
+- fix: typescript type error in example
+- build: bump typescript version
+
 ## v1.1.0
 
 _2022-08-07_
