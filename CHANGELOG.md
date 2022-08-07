@@ -1,5 +1,19 @@
 # @bitarray/es6 ChangeLog
 
+## v1.1.0
+
+_2022-08-07_
+
+- chore: add .vscode/
+- style: add and run prettier
+- chore: remove dist/ from repo
+- refactor: encode/decode
+- feat: add encoding/decoding of bit array to string ([#1](https://github.com/swiing/BitArray/pull/1)) (thanks [@rollie42](https://github.com/rollie42)!)
+- build: move creation of package.json to postbuild
+- chore: add dependabot.yml
+- build: add ci workflow
+- build: bump dependencies versions
+
 ## v1.0.2
 
 _2022-04-20_
