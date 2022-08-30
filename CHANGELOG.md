@@ -1,5 +1,11 @@
 # @bitarray/es6 ChangeLog
 
+## v1.1.2
+
+_2022-08-30_
+
+- fix: correct exports path in package.json
+
 ## v1.1.1
 
 _2022-08-07_
