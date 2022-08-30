@@ -5,9 +5,9 @@
   "typings": "./dist/esm/bitarray.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/esm/bitarray.d.ts",
-      "import": "./dist/esm/bitarray.js",
-      "require": "./dist/cjs/bitarray.js"
+      "types": "./dist/esm/src/bitarray.d.ts",
+      "import": "./dist/esm/src/bitarray.js",
+      "require": "./dist/cjs/src/bitarray.js"
     }
   },
   "repository": "github:swiing/BitArray",
