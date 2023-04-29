@@ -2,7 +2,7 @@
   "name": "@bitarray/es6",
   "version": "1.1.2",
   "description": "An ES6 BitArray class for easy and native-like operations on sequences of bits",
-  "typings": "./dist/esm/bitarray.d.ts",
+  "typings": "./dist/esm/src/bitarray.d.ts",
   "exports": {
     ".": {
       "types": "./dist/esm/src/bitarray.d.ts",
