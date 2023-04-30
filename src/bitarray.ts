@@ -25,16 +25,8 @@
 
 import BitTypedArray from '@bitarray/typedarray';
 
-// missing js extension fails dependent applications
-// but adding js extension fails example/test of the library itself
-// => quick and dirty solution for now: inline import.
-//
-// import { base64MIMEChars, base64UrlChars } from './alphabet';
-const lettersAndDigits =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+import { base64MIMEChars, base64UrlChars } from './alphabet.js';
 
-const base64MIMEChars = lettersAndDigits + '+/';
-const base64UrlChars = lettersAndDigits + '-_';
 const alphabetLengthErrorMsg = "Alphabet's length must be a power of 2";
 
 // I could leverage _views from @bitarray/typedarray, or create a new one here.

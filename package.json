@@ -2,6 +2,7 @@
   "name": "@bitarray/es6",
   "version": "1.1.2",
   "description": "An ES6 BitArray class for easy and native-like operations on sequences of bits",
+  "type": "module",
   "typings": "./dist/esm/src/bitarray.d.ts",
   "exports": {
     ".": {
@@ -24,13 +25,13 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:types": "tsc --emitDeclarationOnly -p tsconfig.json",
-    "example": "node --loader ts-node/esm example",
+    "example": "ts-node --esm --project ./tsconfig.esm.json ./example/index.ts",
     "postbuild": "bash ./scripts/postbuild.sh",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
     "style:fix": "prettier {example,src,test}/**/*.ts --write",
     "style:check": "prettier {example,src,test}/**/*.ts --check",
-    "test": "node --loader ts-node/esm test"
+    "test": "ts-node --esm --project ./tsconfig.esm.json ./test/index.ts"
   },
   "author": "swiing",
   "license": "MIT",

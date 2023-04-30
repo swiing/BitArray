@@ -1,5 +1,5 @@
-import BoolArray from '../src/bitarray';
-import { log as _, logHeader as _$ } from './util';
+import BoolArray from '../src/bitarray.js';
+import { log as _, logHeader as _$ } from './util.js';
 
 import { bit } from '@bitarray/typedarray';
 
