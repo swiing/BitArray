@@ -39,7 +39,7 @@
     "@bitarray/typedarray": "^1.1.1"
   },
   "devDependencies": {
-    "prettier": "^2.6.2",
+    "prettier": "^3.0.0",
     "ts-node": "^10.7.0",
     "typescript": "^5.0.3"
   },
