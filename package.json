@@ -32,7 +32,7 @@
     "style:fix": "prettier {example,src,test}/**/*.ts --write",
     "style:check": "prettier {example,src,test}/**/*.ts --check",
     "test": "ts-node --esm --project ./tsconfig.esm.json ./test/index.ts",
-    "test:ci": "set TS_NODE_PROJECT='./tsconfig.esm.json' && node --no-warnings=ExperimentalWarning --loader ts-node/esm ./test/index.ts"
+    "test:ci": "set TS_NODE_PROJECT=./tsconfig.esm.json && node --no-warnings=ExperimentalWarning --loader ts-node/esm ./test/index.ts"
   },
   "author": "swiing",
   "license": "MIT",
