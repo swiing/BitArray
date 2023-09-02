@@ -1,5 +1,13 @@
 # @bitarray/es6 ChangeLog
 
+## v1.2.0
+
+_2023-09-02_
+
+- fix: make it of "module" type ([9712c08](https://github.com/swiing/BitArray/commit/9712c0894fb00cc33ec27bceadd6d431504ae832))
+- fix: set correct path for typings field in package.json ([#30](https://github.com/swiing/BitArray/pull/30)) (thanks [@yuhr](https://github.com/yuhr)!)
+- chore: drop nodejs v14, add nodejs v20 ([afbff84](https://github.com/swiing/BitArray/commit/afbff84d5535f7605fe890232ed22d8eb243afba))
+
 ## v1.1.2
 
 _2022-08-30_
