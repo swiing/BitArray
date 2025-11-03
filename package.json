@@ -37,7 +37,7 @@
   "author": "swiing",
   "license": "MIT",
   "dependencies": {
-    "@bitarray/typedarray": "^1.1.1"
+    "@bitarray/typedarray": "^1.1.3"
   },
   "devDependencies": {
     "prettier": "^3.0.3",
